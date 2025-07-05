@@ -50,24 +50,32 @@
     var API_URL = 'https://coursera-jhu-default-rtdb.firebaseio.com/menu_items.json';
 
     service.getMatchedMenuItems = function (searchTerm) {
-      // lowercase once for comparison
       var term = searchTerm.toLowerCase();
 
-      return $http({ method: 'GET', url: API_URL }).then(function (resp) {
-        // Firebase returns an OBJECT of objects, not an array
-        var raw = resp.data.menu_items || resp.data;   // fallback
-        var itemsArray = Array.isArray(raw) ? raw : Object.values(raw);
+      return $http({
+        method: 'GET',
+        url:    'https://coursera-jhu-default-rtdb.firebaseio.com/menu_items.json'
+      })
+      .then(function (resp) {
+        var rootObj = resp.data;               // A, B, C, …
+        var found   = [];
 
-        var found = [];
-        itemsArray.forEach(function (item) {
-          if (item.description &&
-              item.description.toLowerCase().indexOf(term) !== -1) {
-            found.push(item);
+        // rootObj is an object of category objects
+        angular.forEach(rootObj, function (category) {
+          if (Array.isArray(category.menu_items)) {
+            category.menu_items.forEach(function (item) {
+              if (item.description &&
+                  item.description.toLowerCase().indexOf(term) !== -1) {
+                found.push(item);
+              }
+            });
           }
         });
-        return found;
+
+        return found;          // resolves to [] if nothing matched
       });
     };
+
   }
 
   /* -------------------------------------------------- found-items directive */
