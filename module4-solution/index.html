@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" ng-app="MenuApp">
+<head>
+  <meta charset="utf-8">
+  <title>Restaurant Menu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Optionally include bootstrap.css -->
+  <link rel="stylesheet" href="styles/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+
+  <!-- ui-view is where templates go -->
+  <div ui-view></div>
+
+  <!-- libs -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.28/angular-ui-router.min.js"></script>
+
+  <!-- app code -->
+  <script src="menuapp.module.js"></script>
+  <script src="routes.js"></script>
+
+  <!-- data layer -->
+  <script src="data/data.module.js"></script>
+  <script src="data/menudata.service.js"></script>
+
+  <!-- categories feature -->
+  <script src="categories/categories.component.js"></script>
+
+  <!-- items feature -->
+  <script src="items/items.component.js"></script>
+</body>
+</html>
