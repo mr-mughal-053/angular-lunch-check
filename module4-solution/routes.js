@@ -3,26 +3,36 @@
 
   angular
     .module('MenuApp')
-    .config(RoutesConfig);
+    .config(RoutesConfig)
+    .controller('CatsStateController', CatsStateController)
+    .controller('ItemsStateController', ItemsStateController);
 
+  /* ---------------- routing ---------------- */
   RoutesConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
   function RoutesConfig($stateProvider, $urlRouterProvider) {
 
-    // Default to home
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
-      // Home -------------
+      // HOME  — just template with link
       .state('home', {
         url: '/',
-        template: '<h3 class="text-center">Welcome to our Restaurant</h3>'
+        template:
+          `<div class="text-center">
+             <h2>Welcome to our Restaurant</h2>
+             <p>
+               <a class="btn btn-primary" ui-sref="categories">
+                 Browse Menu Categories
+               </a>
+             </p>
+           </div>`
       })
 
-      // Categories -------
+      // CATEGORIES
       .state('categories', {
         url: '/categories',
         template: '<categories categories="catsCtrl.categories"></categories>',
-        controller: 'CategoriesStateController as catsCtrl',
+        controller: 'CatsStateController as catsCtrl',
         resolve: {
           categories: ['MenuDataService', function (MenuDataService) {
             return MenuDataService.getAllCategories();
@@ -30,7 +40,7 @@
         }
       })
 
-      // Items -------------
+      // ITEMS
       .state('items', {
         url: '/items/{shortName}',
         template: '<items items="itemsCtrl.items" category-name="{{itemsCtrl.title}}"></items>',
@@ -44,13 +54,9 @@
       });
   }
 
-  // tiny helper controllers just to pass resolved data into components
-  angular.module('MenuApp')
-    .controller('CategoriesStateController', CategoriesStateController)
-    .controller('ItemsStateController',      ItemsStateController);
-
-  CategoriesStateController.$inject = ['categories'];
-  function CategoriesStateController(categories) {
+  /* tiny state controllers just to pass resolved data into components */
+  CatsStateController.$inject = ['categories'];
+  function CatsStateController(categories) {
     var catsCtrl = this;
     catsCtrl.categories = categories;
   }
