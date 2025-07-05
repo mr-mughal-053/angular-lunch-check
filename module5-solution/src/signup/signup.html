@@ -1,0 +1,39 @@
+<div class="container">
+  <h2>Sign Up</h2>
+
+  <form name="signForm" novalidate ng-submit="$ctrl.submit(signForm)">
+    <!-- First Name -->
+    <div class="form-group" ng-class="{'has-error': signForm.first.$invalid && signForm.$submitted}">
+      <label>First Name</label>
+      <input class="form-control" name="first" ng-model="$ctrl.user.firstName" required>
+    </div>
+
+    <!-- Last Name -->
+    <div class="form-group" ng-class="{'has-error': signForm.last.$invalid && signForm.$submitted}">
+      <label>Last Name</label>
+      <input class="form-control" name="last" ng-model="$ctrl.user.lastName" required>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group" ng-class="{'has-error': signForm.email.$invalid && signForm.$submitted}">
+      <label>Email</label>
+      <input class="form-control" type="email" name="email" ng-model="$ctrl.user.email" required>
+    </div>
+
+    <!-- Phone -->
+    <div class="form-group" ng-class="{'has-error': signForm.phone.$invalid && signForm.$submitted}">
+      <label>Phone</label>
+      <input class="form-control" type="tel" name="phone" ng-model="$ctrl.user.phone" required>
+    </div>
+
+    <!-- Favorite Menu Item -->
+    <div class="form-group" ng-class="{'has-error': $ctrl.menuError}">
+      <label>Favorite Menu Number (e.g., L1)</label>
+      <input class="form-control" name="favorite" ng-model="$ctrl.user.favorite" required>
+      <div class="help-block" ng-if="$ctrl.menuError">No such menu number exists.</div>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+    <p class="text-success" ng-if="$ctrl.completed">Your information has been saved.</p>
+  </form>
+</div>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" ng-app="public">
+<head>
+  <meta charset="utf-8">
+  <title>Restaurant (Module 5)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- (Optional)  bootstrap.min.css in styles/ -->
+  <link rel="stylesheet" href="styles/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" ui-sref="public.home">Restaurant</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a ui-sref="public.myinfo">My&nbsp;Info</a></li>
+      <li><a ui-sref="public.signup">Sign&nbsp;Up</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <!-- ui-view outlet -->
+  <div ui-view></div>
+</div>
+
+<!-- LIBS -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.28/angular-ui-router.min.js"></script>
+
+<!-- MAIN MODULE (unchanged from Lecture 59) -->
+<script src="src/menuapp.module.js"></script>
+
+<!-- COMMON + DATA -->
+<script src="src/common/data.module.js"></script>
+<script src="src/common/menudata.service.js"></script>
+<script src="src/common/user.service.js"></script>
+
+<!-- ROUTES -->
+<script src="src/routes.js"></script>
+
+<!-- COMPONENTS -->
+<script src="src/signup/signup.component.js"></script>
+<script src="src/myinfo/myinfo.component.js"></script>
+</body>
+</html>
